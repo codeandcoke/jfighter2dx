@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Clase base para cualquier elemento del juego que sea un bloque no animado
+ * // TODO Todavía no está terminada
  * @author Santiago Faci
  * @version 1.0
  *

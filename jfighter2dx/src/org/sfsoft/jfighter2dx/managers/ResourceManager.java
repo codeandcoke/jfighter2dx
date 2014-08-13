@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -25,7 +26,9 @@ public class ResourceManager {
 	private static Map<String, Sound> sounds = new HashMap<String, Sound>();
 	
 	public static void loadAllResources() {
-		
+
+        TextureAtlas atlas = null;
+
 		Texture.setEnforcePotImages(false);
 		// Imágenes
 		ResourceManager.loadResource("background", new Texture("backgrounds/farback.png"));
@@ -40,47 +43,26 @@ public class ResourceManager {
 		ResourceManager.loadResource("missile_score", new Texture("items/missile_score.png"));
 		
 		// Animaciones
-		ResourceManager.loadResource("ship", new Animation(0.15f, new TextureRegion[]{
-				new Sprite(new Texture(Gdx.files.internal("ship/f1.png"))), new Sprite(new Texture(Gdx.files.internal("ship/f2.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("ship/f3.png"))), new Sprite(new Texture(Gdx.files.internal("ship/f4.png")))}));
-		ResourceManager.loadResource("small_enemy", new Animation(0.15f, new TextureRegion[]{
-				new Sprite(new Texture(Gdx.files.internal("enemy/e_f1.png"))), new Sprite(new Texture(Gdx.files.internal("enemy/e_f2.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("enemy/e_f3.png"))), new Sprite(new Texture(Gdx.files.internal("enemy/e_f4.png"))),
-				new Sprite(new Texture(Gdx.files.internal("enemy/e_f5.png"))), new Sprite(new Texture(Gdx.files.internal("enemy/e_f6.png")))}));
-		ResourceManager.loadResource("stone", new Animation(0.15f, new TextureRegion[]{
-				new Sprite(new Texture(Gdx.files.internal("enemy/stone1.png"))), new Sprite(new Texture(Gdx.files.internal("enemy/stone2.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("enemy/stone3.png"))), new Sprite(new Texture(Gdx.files.internal("enemy/stone4.png"))),
-				new Sprite(new Texture(Gdx.files.internal("enemy/stone5.png"))), new Sprite(new Texture(Gdx.files.internal("enemy/stone6.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("enemy/stone7.png"))), new Sprite(new Texture(Gdx.files.internal("enemy/stone8.png"))),
-				new Sprite(new Texture(Gdx.files.internal("enemy/stone9.png"))), new Sprite(new Texture(Gdx.files.internal("enemy/stone10.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("enemy/stone11.png"))), new Sprite(new Texture(Gdx.files.internal("enemy/stone12.png"))),
-				new Sprite(new Texture(Gdx.files.internal("enemy/stone13.png"))), new Sprite(new Texture(Gdx.files.internal("enemy/stone14.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("enemy/stone15.png"))), new Sprite(new Texture(Gdx.files.internal("enemy/stone16.png")))}));
+        atlas = new TextureAtlas(Gdx.files.internal("ship/ship.pack"));
+		ResourceManager.loadResource("ship", new Animation(0.15f, atlas.findRegions("ship")));
+
+        // Animación de nave pequeña
+        atlas = new TextureAtlas(Gdx.files.internal("enemy/small.pack"));
+		ResourceManager.loadResource("small_enemy", new Animation(0.15f, atlas.findRegions("small")));
+        // Animación para la roca
+        atlas = new TextureAtlas(Gdx.files.internal("enemy/stone.pack"));
+		ResourceManager.loadResource("stone", new Animation(0.15f, atlas.findRegions("stone")));
+
 		ResourceManager.loadResource("pursuer_enemy", ResourceManager.createAnimationFromSpriteSheet("enemy/pursuer.png", 6));
 		ResourceManager.loadResource("shooter_enemy", ResourceManager.createAnimationFromSpriteSheet("enemy/shooter.png", 6));
 		ResourceManager.loadResource("big_enemy", ResourceManager.createAnimationFromSpriteSheet("enemy/big.png", 6));
 		ResourceManager.loadResource("missile", ResourceManager.createAnimationFromSpriteSheet("items/missile.png", 16));
-		ResourceManager.loadResource("explosion", new Animation(0.15f, new TextureRegion[]{
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0000.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0001.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0002.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0003.png"))),
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0004.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0005.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0006.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0007.png"))),
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0008.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0009.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0010.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0011.png"))),
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0012.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0013.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0014.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0015.png"))),
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0016.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0017.png"))),
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0018.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0019.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0020.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0021.png"))),
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0022.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0023.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0024.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0025.png"))),
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0026.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0027.png"))),
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0028.png"))), new Sprite(new Texture(Gdx.files.internal("explosion/explosion0029.png"))), 
-				new Sprite(new Texture(Gdx.files.internal("explosion/explosion0030.png")))}));
-		/*
-		// SpriteSheets
-		ResourceManager.loadResource("block", new SpriteSheet(new Image("res/items/blocks1.png"), 32, 32, 2, 2));
-		*/
+        // Animación para las explosiones
+        atlas = new TextureAtlas(Gdx.files.internal("explosion/explosion.pack"));
+		ResourceManager.loadResource("explosion", new Animation(0.15f, atlas.findRegions("explosion")));
+
+		//ResourceManager.loadResource("block", new SpriteSheet(new Image("res/items/blocks1.png"), 32, 32, 2, 2));
+
 		// Sonidos
 		ResourceManager.loadResource("shoot", Gdx.audio.newSound(Gdx.files.internal("sounds/disparo.mp3")));
 		ResourceManager.loadResource("explosion", Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav")));
