@@ -39,7 +39,7 @@ public class EnemySpawner {
 		switch (type) {
 		
 			case SMALL_ENEMY:
-				enemy = new SmallEnemy(Constants.SCREEN_WIDTH, new Random().nextInt(SCREEN_HEIGHT - ENEMY_HEIGHT), -80f);
+				enemy = new SmallEnemy(Constants.SCREEN_WIDTH, new Random().nextInt(SCREEN_HEIGHT - ENEMY_HEIGHT), -160f);
 				break;
 			case SHOOTER_ENEMY:
 				int location = new Random().nextInt(2);
@@ -69,7 +69,7 @@ public class EnemySpawner {
 				enemy = new StaticShooterEnemy(Constants.SCREEN_WIDTH - 100, new Random().nextInt(SCREEN_HEIGHT - ENEMY_HEIGHT), -100f, BulletDirection.LEFT);
 				((StaticShooterEnemy) enemy).setEnemies(spriteManager.getEnemies());
 			case SMART_ENEMY:
-				enemy = new SmartEnemy(Constants.SCREEN_WIDTH, MathUtils.random(0, SCREEN_HEIGHT - ENEMY_HEIGHT), -100f);
+				enemy = new SmartEnemy(Constants.SCREEN_WIDTH, MathUtils.random(0, SCREEN_HEIGHT - ENEMY_HEIGHT), -150f);
 			default:
 				break;
 		}
@@ -91,7 +91,7 @@ public class EnemySpawner {
 		switch (type) {
 		
 		case SMALL_ENEMY:
-			enemy = new SmallEnemy(x, y, -50f);
+			enemy = new SmallEnemy(x, y, -150f);
 			break;
 		case SHOOTER_ENEMY:
 			enemy = new ShooterEnemy(x, y, -50f, BulletDirection.UP);

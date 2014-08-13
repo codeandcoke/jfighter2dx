@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Clase base para representar a los items que el personaje puede coger durante el juego (powerups, vida, armas, . . .)
  * @author Santiago Faci
+ * @version 1.0
  *
  */
 public abstract class Powerup {

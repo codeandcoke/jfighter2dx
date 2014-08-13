@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Enemigo estándar, de pequeñas dimensiones y poca movilidad
  * @author Santiago Faci
+ * @version 1.0
  *
  */
 public class SmallEnemy extends Enemy {

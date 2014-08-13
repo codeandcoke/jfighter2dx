@@ -1,5 +1,6 @@
 package org.sfsoft.jfighter2dx.screens;
 
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import org.sfsoft.jfighter2dx.JFighter2DX;
 import org.sfsoft.jfighter2dx.screens.GameScreen.GameType;
 import org.sfsoft.jfighter2dx.util.Constants;
@@ -17,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 /**
  * Pantalla principal del juego, donde se muestra el menú principal
  * @author Santiago Faci
- * @version 1.0
+ * @version 2.0
  *
  */
 public class MainMenuScreen implements Screen {
@@ -28,99 +29,67 @@ public class MainMenuScreen implements Screen {
 	public MainMenuScreen(JFighter2DX game) {
 		this.game = game;
 	}
-	
-	private void loadScreen() {
-				
-		// Grafo de escena que contendrá todo el menú
-		stage = new Stage();
-					
-		// Crea una tabla, donde añadiremos los elementos de menú
-		Table table = new Table();
-		table.setPosition(Constants.SCREEN_WIDTH / 2.5f, Constants.SCREEN_HEIGHT / 1.5f);
-		// La tabla ocupa toda la pantalla
-	    table.setFillParent(true);
-	    table.setHeight(500);
-	    stage.addActor(table);
-		
-	    // Etiqueta de texto
-		Label label = new Label("Bienvenido a JFighter2DX", game.getSkin());
-		table.addActor(label);
-		
-		// Botón
-		TextButton buttonPlay = new TextButton("Partida Rapida", game.getSkin());
-		buttonPlay.setPosition(label.getOriginX(), label.getOriginY() - 120);
-		buttonPlay.setWidth(200);
-		buttonPlay.setHeight(40);
-		buttonPlay.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				
-				dispose();
-				game.setScreen(new GameScreen(game, GameType.QUICK));
-			}
-		});
-		table.addActor(buttonPlay);
-		
-		// Botón
-		TextButton buttonHistory = new TextButton("Modo Historia", game.getSkin());
-		buttonHistory.setPosition(label.getOriginX(), label.getOriginY() - 170);
-		buttonHistory.setWidth(200);
-		buttonHistory.setHeight(40);
-		buttonHistory.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				
-				dispose();
-				game.setScreen(new GameScreen(game, GameType.HISTORY));
-			}
-		});
-		table.addActor(buttonHistory);
-		
-		// Botón
-		TextButton buttonConfig = new TextButton("Configurar", game.getSkin());
-		buttonConfig.setPosition(label.getOriginX(), label.getOriginY() - 220);
-		buttonConfig.setWidth(200);
-		buttonConfig.setHeight(40);
-		buttonConfig.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				
-				dispose();
-				game.setScreen(new ConfigurationScreen(game));
-			}
-		});
-		table.addActor(buttonConfig);
-		
-		// Botón
-		TextButton buttonQuit = new TextButton("Salir", game.getSkin());
-		buttonQuit.setPosition(label.getOriginX(), label.getOriginY() - 270);
-		buttonQuit.setWidth(200);
-		buttonQuit.setHeight(40);
-		buttonQuit.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;	
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				
-				game.dispose();
-				System.exit(0);
-			}
-		});
-		table.addActor(buttonQuit);
-		
-		Gdx.input.setInputProcessor(stage);
-	}
-	
+
 	@Override
 	public void show() {
 
-		loadScreen();
+        stage = new Stage();
+
+        Table table = new Table(game.getSkin());
+        table.setFillParent(true);
+        table.center();
+
+        Label title = new Label("JFIGHTER2DX\nMAIN MENU", game.getSkin());
+        title.setFontScale(2.5f);
+
+        TextButton quickButton = new TextButton("QUICK PLAY", game.getSkin());
+        quickButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                dispose();
+                game.setScreen(new GameScreen(game, GameType.QUICK));
+            }
+        });
+        TextButton historyButton = new TextButton("PLAY HISTORY", game.getSkin());
+        historyButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                dispose();
+                game.setScreen(new GameScreen(game, GameType.HISTORY));
+            }
+        });
+        TextButton optionsButton = new TextButton("OPTIONS", game.getSkin());
+        optionsButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                dispose();
+                game.setScreen(new ConfigurationScreen(game));
+
+            }
+        });
+        TextButton exitButton = new TextButton("QUIT GAME", game.getSkin());
+        exitButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                dispose();
+                System.exit(0);
+            }
+        });
+
+        Label aboutLabel = new Label("jfighter2dx v1\n(c) Santiago Faci\nhttp://bitbucket.org/sfaci/jfighter2dx", game.getSkin());
+        aboutLabel.setFontScale(1f);
+
+        table.row().height(150);
+        table.add(title).center().pad(35f);
+        table.row().height(70);
+        table.add(quickButton).center().width(300).pad(5f);
+        table.row().height(70);
+        table.add(historyButton).center().width(300).pad(5f);
+        table.row().height(70);
+        table.add(optionsButton).center().width(300).pad(5f);
+        table.row().height(70);
+        table.add(exitButton).center().width(300).pad(5f);
+        table.row().height(70);
+        table.add(aboutLabel).center().pad(55f);
+
+        stage.addActor(table);
+        Gdx.input.setInputProcessor(stage);
 	}
 	
 	@Override
@@ -155,14 +124,11 @@ public class MainMenuScreen implements Screen {
 	
 
 	@Override
-	public void resize(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		
+	public void resize(int width, int height) {
+        stage.setViewport(width, height);
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-		
 	}
 }

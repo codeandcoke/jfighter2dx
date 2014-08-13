@@ -5,6 +5,11 @@ import org.sfsoft.jfighter2dx.util.Constants;
 
 import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * Naves pequeñas que describen un movimiento senoidal
+ * @author Santiago Faci
+ * @version 1.0
+ */
 public class SmartEnemy extends Enemy {
 
 	float arc;

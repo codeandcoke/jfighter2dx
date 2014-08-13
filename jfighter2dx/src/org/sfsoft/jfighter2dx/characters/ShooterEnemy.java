@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Array;
 /**
  * Un tipo de enemigo que es capaz de disparar
  * @author Santiago Faci
+ * @version 1.0
  *
  */
 public class ShooterEnemy extends Enemy {

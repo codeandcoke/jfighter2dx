@@ -1,5 +1,6 @@
 package org.sfsoft.jfighter2dx.screens;
 
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import org.sfsoft.jfighter2dx.JFighter2DX;
 import org.sfsoft.jfighter2dx.util.Constants;
 
@@ -33,84 +34,80 @@ public class ConfigurationScreen implements Screen {
 	public ConfigurationScreen(JFighter2DX game) {
 		this.game = game;
 	}
-	
+
+    /**
+     * Carga el menú en pantalla
+     */
 	private void loadScreen() {
-		
-		// Grafo de escena que contendrá todo el menú
-		stage = new Stage();
-					
-		// Crea una tabla, donde añadiremos los elementos de menú
-		Table table = new Table();
-		table.setPosition(Constants.SCREEN_WIDTH / 2.5f, Constants.SCREEN_HEIGHT / 1.5f);
-		// La tabla ocupa toda la pantalla
-	    table.setFillParent(true);
-	    table.setHeight(500);
-	    stage.addActor(table);
-		
-		Label label = new Label("Configurar JFighter2DX", game.getSkin());
-		table.addActor(label);
-		
-		final CheckBox checkSound = new CheckBox(" Sonido", game.getSkin());
-		checkSound.setChecked(prefs.getBoolean("sound"));
-		checkSound.setPosition(label.getOriginX(), label.getOriginY() - 40);
-		checkSound.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;	
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				
-				prefs.putBoolean("sound", checkSound.isChecked());
-			}
-		});
-		table.addActor(checkSound);
-		
-		Label resLabel = new Label("Dificultad", game.getSkin());
-		resLabel.setPosition(label.getOriginX(), label.getOriginY() - 70);
-		table.addActor(resLabel);
-		
-		String[] resolutionsArray = {"Baja", "Media", "Alta"};
-		final List resolutionsList = new List(resolutionsArray, game.getSkin());
-		resolutionsList.setPosition(label.getOriginX(),  label.getOriginY() - 150);
-		resolutionsList.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;	
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				
-				switch (resolutionsList.getSelectedIndex()) {
-				case 0:
-					prefs.putString("difficulty", "low");
-					break;
-				case 1:
-					prefs.putString("difficulty", "medium");
-					break;
-				case 2:
-					prefs.putString("difficulty", "high");
-					break;
-				default:
-				}
-			}
-		});
-		table.addActor(resolutionsList);
-		
-		TextButton buttonMainMenu = new TextButton("Volver", game.getSkin());
-		buttonMainMenu.setPosition(label.getOriginX(), label.getOriginY() - 220);
-		buttonMainMenu.setWidth(200);
-		buttonMainMenu.setHeight(40);
-		buttonMainMenu.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;	
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				
-				prefs.flush();
-				dispose();
-				game.setScreen(new MainMenuScreen(game));
-			}
-		});
-		table.addActor(buttonMainMenu);
-		
-		Gdx.input.setInputProcessor(stage);
+
+        stage = new Stage();
+
+        Table table = new Table(game.getSkin());
+        table.setFillParent(true);
+        table.center();
+
+        Label title = new Label("JFIGHTER2DX\nSETTINGS", game.getSkin());
+        title.setFontScale(2.5f);
+
+        final CheckBox checkSound = new CheckBox(" SOUND", game.getSkin());
+        checkSound.setChecked(prefs.getBoolean("sound"));
+        checkSound.addListener(new ClickListener() {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+                prefs.putBoolean("sound", checkSound.isChecked());
+            }
+        });
+
+        Label difficultyLabel = new Label("-- DIFFICULTY --", game.getSkin());
+
+        String[] resolutionsArray = {"LOW", "MEDIUM", "HIGH"};
+        final List difficultyList = new List(resolutionsArray, game.getSkin());
+
+        difficultyList.addListener(new ClickListener() {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+                switch (difficultyList.getSelectedIndex()) {
+                    case 0:
+                        prefs.putString("difficulty", "low");
+                        break;
+                    case 1:
+                        prefs.putString("difficulty", "medium");
+                        break;
+                    case 2:
+                        prefs.putString("difficulty", "high");
+                        break;
+                    default:
+                }
+            }
+        });
+
+        TextButton exitButton = new TextButton("MAIN MENU", game.getSkin());
+        exitButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                prefs.flush();
+                dispose();
+                game.setScreen(new MainMenuScreen(game));
+            }
+        });
+
+        Label aboutLabel = new Label("jfighter2dx v1\n(c) Santiago Faci\nhttp://bitbucket.org/sfaci/jfighter2dx", game.getSkin());
+        aboutLabel.setFontScale(1f);
+
+        table.row().height(150);
+        table.add(title).center().pad(35f);
+        table.row().height(20);
+        table.add(checkSound).center().pad(5f);
+        table.row().height(20);
+        table.add(difficultyLabel).center().pad(5f);
+        table.row().height(70);
+        table.add(difficultyList).center().pad(5f);
+        table.row().height(70);
+        table.add(exitButton).center().width(300).pad(5f);
+        table.row().height(70);
+        table.add(aboutLabel).center().pad(55f);
+
+        stage.addActor(table);
+        Gdx.input.setInputProcessor(stage);
 	}
 	
 	/**
@@ -157,12 +154,11 @@ public class ConfigurationScreen implements Screen {
 	}
 
 	@Override
-	public void resize(int arg0, int arg1) {
+	public void resize(int width, int height) {
+        stage.setViewport(width, height);
 	}
 
 	@Override
 	public void resume() {
-	
-		
 	}
 }

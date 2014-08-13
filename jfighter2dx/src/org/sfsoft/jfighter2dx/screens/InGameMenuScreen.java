@@ -1,5 +1,6 @@
 package org.sfsoft.jfighter2dx.screens;
 
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import org.sfsoft.jfighter2dx.JFighter2DX;
 import org.sfsoft.jfighter2dx.util.Constants;
 
@@ -32,77 +33,51 @@ public class InGameMenuScreen implements Screen {
 		this.gameScreen = gameScreen;
 	}
 	
-	private void loadScreen() {
-		
-		// Grafo de escena que contendrá todo el menú
-		stage = new Stage();
-					
-		// Crea una tabla, donde añadiremos los elementos de menú
-		Table table = new Table();
-		table.setPosition(Constants.SCREEN_WIDTH / 2.5f, Constants.SCREEN_HEIGHT / 1.5f);
-		// La tabla ocupa toda la pantalla
-	    table.setFillParent(true);
-	    table.setHeight(500);
-	    stage.addActor(table);
-		
-		Label label = new Label("JFighter2DX", game.getSkin());
-		table.addActor(label);
-		
-		TextButton buttonResume = new TextButton("Continuar", game.getSkin());
-		buttonResume.setPosition(label.getOriginX(), label.getOriginY() - 120);
-		buttonResume.setWidth(200);
-		buttonResume.setHeight(40);
-		buttonResume.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;	
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				
-				dispose();
-				game.setScreen(gameScreen);
-			}
-		});
-		table.addActor(buttonResume);
-		
-		TextButton buttonMainMenu = new TextButton("Volver al Menu Principal", game.getSkin());
-		buttonMainMenu.setPosition(label.getOriginX(), label.getOriginY() - 170);
-		buttonMainMenu.setWidth(200);
-		buttonMainMenu.setHeight(40);
-		buttonMainMenu.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;	
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				
-				dispose();
-				game.setScreen(new MainMenuScreen(game));
-			}
-		});
-		table.addActor(buttonMainMenu);
-		
-		TextButton buttonQuit = new TextButton("Salir", game.getSkin());
-		buttonQuit.setPosition(label.getOriginX(), label.getOriginY() - 220);
-		buttonQuit.setWidth(200);
-		buttonQuit.setHeight(40);
-		buttonQuit.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;	
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				
-				dispose();
-				System.exit(0);
-			}
-		});
-		table.addActor(buttonQuit);
-		
-		Gdx.input.setInputProcessor(stage);
-	}
-	
 	@Override
 	public void show() {
-		
-		loadScreen();
+
+        stage = new Stage();
+
+        Table table = new Table(game.getSkin());
+        table.setFillParent(true);
+        table.center();
+
+        Label title = new Label("JFIGHTER2DX", game.getSkin());
+        title.setFontScale(2.5f);
+
+        TextButton quickButton = new TextButton("RESUME", game.getSkin());
+        quickButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                dispose();
+                game.setScreen(gameScreen);
+            }
+        });
+        TextButton historyButton = new TextButton("RETURN TO MAIN MENU", game.getSkin());
+        historyButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                dispose();
+                game.setScreen(new MainMenuScreen(game));
+            }
+        });
+        TextButton exitButton = new TextButton("QUIT GAME", game.getSkin());
+        exitButton.addListener(new ClickListener() {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                dispose();
+                System.exit(0);
+            }
+        });
+
+        table.row().height(150);
+        table.add(title).center().pad(35f);
+        table.row().height(70);
+        table.add(quickButton).center().width(300).pad(5f);
+        table.row().height(70);
+        table.add(historyButton).center().width(300).pad(5f);
+        table.row().height(70);
+        table.add(exitButton).center().width(300).pad(5f);
+
+        stage.addActor(table);
+        Gdx.input.setInputProcessor(stage);
 	}
 	
 	@Override
@@ -129,7 +104,8 @@ public class InGameMenuScreen implements Screen {
 	}
 
 	@Override
-	public void resize(int arg0, int arg1) {
+	public void resize(int width, int height) {
+        stage.setViewport(width, height);
 	}
 
 	@Override

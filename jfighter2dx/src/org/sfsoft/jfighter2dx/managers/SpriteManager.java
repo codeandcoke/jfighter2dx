@@ -197,7 +197,6 @@ public class SpriteManager {
 		ship.draw(batch);
 		
 		for (Enemy enemy : enemies) {
-			System.out.println(enemy.getClass().getSimpleName());
 			enemy.draw(batch);
 		}
 		

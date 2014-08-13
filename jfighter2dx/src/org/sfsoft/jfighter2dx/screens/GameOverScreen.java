@@ -2,6 +2,7 @@ package org.sfsoft.jfighter2dx.screens;
 
 import java.util.List;
 
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import org.sfsoft.jfighter2dx.JFighter2DX;
 import org.sfsoft.jfighter2dx.managers.ConfigurationManager;
 import org.sfsoft.jfighter2dx.managers.ConfigurationManager.Score;
@@ -38,100 +39,84 @@ public class GameOverScreen implements Screen {
 	}
 	
 	/**
-	 * Carga las puntuaciones en el menú
-	 * @param table
-	 * @param stage
-	 * @param x
-	 * @param y
+	 * Obtiene el top scores de anteriores jugadores
+     * @return Los nombres y puntuaciones de las primeras posiciones
 	 */
-	private void loadScores(Table table, Stage stage, float x, float y) {
+	private String loadScores() {
 		
 		// Lee las puntuaciones
 		List<Score> scores = ConfigurationManager.getTopScores();
 		
-		Label labelList = null;
-		for (Score score : scores) {
-			labelList = new Label(score.name + " - " + score.score, game.getSkin());
-			labelList.setPosition(x, y);
-			table.addActor(labelList);
-			y -= 20;
-		}
-	}
-	
-	private void loadScreen() {
-		
-		// Grafo de escena que contendrá todo el menú
-		stage = new Stage();
-					
-		// Crea una tabla, donde añadiremos los elementos de menú
-		final Table table = new Table();
-		table.setPosition(Constants.SCREEN_WIDTH / 2.5f, Constants.SCREEN_HEIGHT / 1.5f);
-		// La tabla ocupa toda la pantalla
-	    table.setFillParent(true);
-	    table.setHeight(500);
-	    stage.addActor(table);
-		
-		final Label label = new Label("Mejores puntuaciones JFighter2DX", game.getSkin());
-		table.addActor(label);
-		
-		// Carga la lista de puntuaciones (top 10)
-		loadScores(table, stage, label.getOriginX(), -50);
-		
-		Label labelScore = new Label("Tu puntuacion: " + game.score, game.getSkin());
-		labelScore.setPosition(label.getOriginX(), label.getOriginY() - 300);
-		table.addActor(labelScore);
-		
-		// El usuario ya ha rellenado su nombre
-		if (done) {
-			TextButton buttonQuit = new TextButton("Volver", game.getSkin());
-			buttonQuit.setPosition(label.getOriginX(), label.getOriginY() - 350);
-			buttonQuit.setWidth(200);
-			buttonQuit.setHeight(40);
-			buttonQuit.addListener(new InputListener() {
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;	
-				}
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-					
-					game.setScreen(new MainMenuScreen(game));
-				}
-			});
-			table.addActor(buttonQuit);
-		}
-		else {
-		// El usuario aún no he escrito su nombre
-			final TextField textName = new TextField("Introduce tu nombre", game.getSkin());
-			textName.setPosition(label.getOriginX(), label.getOriginY() - 350);
-			textName.setWidth(200);
-			textName.setHeight(40);
-			table.addActor(textName);
-			
-			TextButton buttonQuit = new TextButton("Ok", game.getSkin());
-			buttonQuit.setPosition(label.getOriginX(), label.getOriginY() - 400);
-			buttonQuit.setWidth(200);
-			buttonQuit.setHeight(40);
-			buttonQuit.addListener(new InputListener() {
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;	
-				}
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-					
-					ConfigurationManager.addScores(textName.getText(), game.score);
-					stage.clear();
-					done = true;
-					loadScreen();
-				}
-			});
-			table.addActor(buttonQuit);
-		}
-		
-		
-		Gdx.input.setInputProcessor(stage);
+		String values = "";
+		for (Score score : scores)
+            values += score.name + " - " + score.score + "\n";
+
+        return values;
 	}
 	
 	@Override
 	public void show() {
-		loadScreen();
+
+        loadScreen();
+    }
+
+    private void loadScreen() {
+
+        stage = new Stage();
+
+        Table table = new Table(game.getSkin());
+        table.setFillParent(true);
+        table.center();
+
+        final Label title = new Label("JFIGHTER2DX TOP SCORE", game.getSkin());
+        title.setFontScale(2.5f);
+        // Carga la lista de puntuaciones (top 10)
+        String values = loadScores();
+        Label labelTopScore = new Label(values, game.getSkin());
+        Label labelScore = new Label("YOUR SCORE: " + game.score, game.getSkin());
+
+        table.row().height(50);
+        table.add(title).center().pad(35f);
+        table.row().height(200);
+        table.add(labelTopScore).center().pad(5f);
+        table.row().height(20);
+        table.add(labelScore).center().pad(5f);
+
+        // El usuario ya ha rellenado su nombre
+        if (done) {
+            TextButton quitButton = new TextButton("MAIN MENU", game.getSkin());
+            quitButton.addListener(new ClickListener() {
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+                    game.setScreen(new MainMenuScreen(game));
+                }
+            });
+
+            table.row().height(70);
+            table.add(quitButton).center().width(300).pad(5f);
+        }
+        else {
+            // El usuario aún no he escrito su nombre
+            final TextField nameTextField = new TextField("TYPE YOUR NAME", game.getSkin());
+
+            TextButton quitButton = new TextButton("OK", game.getSkin());
+            quitButton.addListener(new ClickListener() {
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    ConfigurationManager.addScores(nameTextField.getText(), game.score);
+                    stage.clear();
+                    done = true;
+                    loadScreen();
+                }
+            });
+
+            table.row().height(20);
+            table.add(nameTextField).center().width(250).pad(55f);
+            table.row().height(50);
+            table.add(quitButton).center().width(300).pad(5f);
+        }
+
+        stage.addActor(table);
+        Gdx.input.setInputProcessor(stage);
 	}
 	
 	@Override
@@ -158,7 +143,8 @@ public class GameOverScreen implements Screen {
 	}
 
 	@Override
-	public void resize(int arg0, int arg1) {	
+	public void resize(int width, int height) {
+        stage.setViewport(width, height);
 	}
 
 	@Override
