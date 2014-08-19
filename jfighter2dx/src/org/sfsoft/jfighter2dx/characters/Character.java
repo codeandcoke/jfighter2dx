@@ -9,8 +9,7 @@ import com.badlogic.gdx.utils.Disposable;
 /**
  * Representa cualquier elemento animado (juegador o NPC) del juego
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public abstract class Character implements Disposable {
 

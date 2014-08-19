@@ -9,8 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Las bombas son un powerup que permite eliminar a todos los enemigos de la pantalla 
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class Bomb extends Powerup {
 	

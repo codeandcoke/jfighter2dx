@@ -6,8 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * Clase base de todos los enemigos del personaje en el juego
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public abstract class Enemy extends Character {
 	

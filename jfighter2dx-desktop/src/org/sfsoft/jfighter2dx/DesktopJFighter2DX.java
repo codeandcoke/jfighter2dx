@@ -6,9 +6,9 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 /**
- * Clase lanzadera para la versión PC Desktop
+ * Clase lanzadera para la versión Desktop PC
  * @author Santiago Faci
- * @version 1.0
+ * @version Agosto 2014
  */
 public class DesktopJFighter2DX {
 

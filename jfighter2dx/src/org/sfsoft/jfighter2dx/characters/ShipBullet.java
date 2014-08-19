@@ -7,8 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Proyectiles que lanza la nave del personaje principal
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class ShipBullet extends Bullet {
 

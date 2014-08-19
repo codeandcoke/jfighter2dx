@@ -11,8 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Clase que representa a los mísiles que lanza la nave del personaje
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class Missile extends Bullet {
 

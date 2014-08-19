@@ -9,8 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Escudo que protege al personaje de cualquier impacto
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class Shield extends Powerup {
 	

@@ -21,9 +21,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 /**
  * Pantalla de fin de partida, donde va el usuario cuando muere su personaje
+ * Esta pantalla presenta dos aspectos diferentes: una cuando se está solicitando al usuario
+ * que introduzca su puntuación y otra cuando éste ya la ha introducido
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class GameOverScreen implements Screen {
 

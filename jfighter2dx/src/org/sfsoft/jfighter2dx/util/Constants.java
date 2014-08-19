@@ -3,7 +3,7 @@ package org.sfsoft.jfighter2dx.util;
 /**
  * Constantes varias del juego
  * @author Santiago Faci
- * @version 1.0
+ * @version Agosto 2014
  */
 public interface Constants {
 

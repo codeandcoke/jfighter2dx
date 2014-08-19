@@ -24,8 +24,7 @@ import com.badlogic.gdx.utils.Array;
  * generateRandomLevel() genera enemigos de forma aleatoria a lo largo del tiempo
  * 
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class LevelManager {
 

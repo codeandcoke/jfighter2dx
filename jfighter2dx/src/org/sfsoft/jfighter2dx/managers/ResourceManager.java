@@ -7,7 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -16,18 +15,18 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * En el caso de este juego, al comienzo del desarrollo, reducía en más de un 100% el uso de CPU con respecto a cargar los recursos
  * cada vez que se necesitaban
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class ResourceManager {
 
 	private static Map<String, Texture> textures = new HashMap<String, Texture>();
 	private static Map<String, Animation> animations = new HashMap<String, Animation>();
 	private static Map<String, Sound> sounds = new HashMap<String, Sound>();
+    private static Map<String, TextureAtlas> atlases = new HashMap<String, TextureAtlas>();
 	
 	public static void loadAllResources() {
 
-        TextureAtlas atlas = null;
+        TextureAtlas atlas;
 
 		Texture.setEnforcePotImages(false);
 		// Imágenes
@@ -38,12 +37,12 @@ public class ResourceManager {
 		ResourceManager.loadResource("shield", new Texture("items/shield.png"));
 		
 		// Onscreen information
-		ResourceManager.loadResource("live", new Texture("ship/live.png"));
 		ResourceManager.loadResource("bomb_score", new Texture("items/bomb_score.png"));
 		ResourceManager.loadResource("missile_score", new Texture("items/missile_score.png"));
 		
 		// Animaciones
         atlas = new TextureAtlas(Gdx.files.internal("ship/ship.pack"));
+        ResourceManager.loadResource("ship", atlas);
 		ResourceManager.loadResource("ship", new Animation(0.15f, atlas.findRegions("ship")));
 
         // Animación de nave pequeña
@@ -94,7 +93,6 @@ public class ResourceManager {
 	 * @param resource
 	 */
 	public static void loadResource(String name, Texture resource) {
-		
 		textures.put(name, resource);
 	}
 	
@@ -104,7 +102,6 @@ public class ResourceManager {
 	 * @param resource
 	 */
 	public static void loadResource(String name, Animation resource) {
-		
 		animations.put(name, resource);
 	}
 	
@@ -114,9 +111,12 @@ public class ResourceManager {
 	 * @param sound
 	 */
 	public static void loadResource(String name, Sound sound) {
-		
 		sounds.put(name, sound);
 	}
+
+    public static void loadResource(String name, TextureAtlas textureAtlas) {
+        atlases.put(name, textureAtlas);
+    }
 	
 	/**
 	 * Obtiene un recurso de imagen de memoria
@@ -124,7 +124,6 @@ public class ResourceManager {
 	 * @return
 	 */
 	public static Texture getTexture(String name) {
-		
 		return textures.get(name);
 	}
 	
@@ -134,7 +133,6 @@ public class ResourceManager {
 	 * @return
 	 */
 	public static Animation getAnimation(String name) {
-		
 		return animations.get(name);
 	}
  
@@ -144,7 +142,10 @@ public class ResourceManager {
 	 * @return
 	 */
 	public static Sound getSound(String name) {
-		
 		return sounds.get(name);
 	}
+
+    public static TextureAtlas getAtlas(String name) {
+        return atlases.get(name);
+    }
 }

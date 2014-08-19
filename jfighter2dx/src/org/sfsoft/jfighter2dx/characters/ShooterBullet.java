@@ -9,8 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Proyectiles lanzados por los enemigos ShooterEnemy
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class ShooterBullet extends Enemy {
 

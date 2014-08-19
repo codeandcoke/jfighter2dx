@@ -22,8 +22,7 @@ import com.badlogic.gdx.math.MathUtils;
 /**
  * Clase donde se gestiona la generación de enemigos de diferentes tipos
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class EnemySpawner {
 

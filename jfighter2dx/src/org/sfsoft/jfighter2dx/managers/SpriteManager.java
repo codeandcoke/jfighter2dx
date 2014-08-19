@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.Array;
 /**
  * Genera y actualiza todos los elementos que se dibujan en la pantalla
  * @author Santiago Faci
- * @version 1.0
+ * @version Agosto 2014
  */
 public class SpriteManager {
 

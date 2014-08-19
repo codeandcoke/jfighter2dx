@@ -11,8 +11,7 @@ import com.badlogic.gdx.utils.Disposable;
 /**
  * Representa la explosión de cualquier elemento del juego
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class Explosion implements Disposable {
 

@@ -8,8 +8,7 @@ import com.badlogic.gdx.Gdx;
 /**
  * Tipo de enemigo que permanace en la parte derecha de la pantalla, sube y baja y dispara hacia la izquierda
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class StaticShooterEnemy extends ShooterEnemy {
 

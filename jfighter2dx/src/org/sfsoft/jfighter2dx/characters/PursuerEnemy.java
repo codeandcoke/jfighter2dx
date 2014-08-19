@@ -8,8 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Tipo de enemigo que es capaz de perseguir al personaje del juego
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class PursuerEnemy extends Enemy {
 

@@ -19,8 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
  * Se muestra cuando el jugador pulsa la tecla ESCAPE y muestra algunas opciones de la partida
  * y la opción de salir del juego
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class InGameMenuScreen implements Screen {
 

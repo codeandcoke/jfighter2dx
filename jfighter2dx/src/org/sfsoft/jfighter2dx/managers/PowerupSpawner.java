@@ -13,8 +13,7 @@ import org.sfsoft.jfighter2dx.powerups.Powerup.PowerupType;
 /**
  * Clase que genera los diferentes powerups que aparecen a lo largo de la partida
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class PowerupSpawner {
 

@@ -1,21 +1,16 @@
 package org.sfsoft.jfighter2dx.characters;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.sfsoft.jfighter2dx.characters.ShooterBullet.BulletDirection;
 import org.sfsoft.jfighter2dx.managers.ResourceManager;
 import org.sfsoft.jfighter2dx.util.Constants;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 /**
  * Un tipo de enemigo que es capaz de disparar
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class ShooterEnemy extends Enemy {
 

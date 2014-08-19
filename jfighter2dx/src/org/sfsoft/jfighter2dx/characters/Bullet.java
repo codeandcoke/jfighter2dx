@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * Es la clase base para cualquier tipo de proyectil en el juego
  * @author Santiago Faci
- * @version 1.0
+ * @version Agosto 2014
  *
  */
 public abstract class Bullet extends Character {

@@ -18,8 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 /**
  * Pantalla principal del juego, donde se muestra el menú principal
  * @author Santiago Faci
- * @version 2.0
- *
+ * @version Agosto 2014
  */
 public class MainMenuScreen implements Screen {
 

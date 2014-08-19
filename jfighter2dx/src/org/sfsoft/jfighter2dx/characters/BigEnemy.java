@@ -8,13 +8,13 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Tipo de enemigo de grandes dimensiones y mayor resistencia
  * @author Santiago Faci
- * @version 1.0
+ * @version Agosto 2014
  *
  */
 public class BigEnemy extends Enemy {
 	
 	/**
-	 * 
+	 * Instancia un enemigo de tamaño doble
 	 * @param x Posición inicial x
 	 * @param y Posición inicial y
 	 * @param speed Velocidad en x

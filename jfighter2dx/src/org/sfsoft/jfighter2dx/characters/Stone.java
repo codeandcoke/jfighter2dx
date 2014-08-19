@@ -9,8 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Representa a rocas y piedras que pueden aparecer durante el juego en la pantalla
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class Stone extends Enemy {
 

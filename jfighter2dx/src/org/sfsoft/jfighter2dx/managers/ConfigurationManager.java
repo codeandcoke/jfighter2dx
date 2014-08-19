@@ -16,8 +16,7 @@ import com.badlogic.gdx.Preferences;
 /**
  * Clase que gestiona la configuración del juego
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class ConfigurationManager {
 
@@ -75,7 +74,7 @@ public class ConfigurationManager {
 			Statement statement = connection.createStatement();
 			ResultSet res = statement.executeQuery("SELECT name, score FROM scores ORDER BY score DESC LIMIT 10");
 			List<Score> scores = new ArrayList<Score>();
-			Score score = null;
+			Score score;
 			while (res.next()) {
 				score = new Score();
 				score.name = res.getString("name");

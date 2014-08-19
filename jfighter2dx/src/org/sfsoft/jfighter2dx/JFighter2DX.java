@@ -15,8 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 /**
  * Clase principal del juego
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class JFighter2DX extends Game {
 	

@@ -19,8 +19,7 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Nave del personaje del juego
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class Ship extends Character {
 
@@ -208,7 +207,7 @@ public class Ship extends Character {
 	public void shoot() {
 		
 		Bullet bullet = new ShipBullet(getX() + 50, getY(), getBulletSpeed());
-		getBullets().add(bullet);
+		bullets.add(bullet);
 		if (configurationManager.isSoundEnabled())
 			ResourceManager.getSound("shoot").play();
 	}

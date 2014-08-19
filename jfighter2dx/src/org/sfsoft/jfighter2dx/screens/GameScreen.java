@@ -17,8 +17,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 /**
  * Pantalla de juego, donde el usuario juega su partida
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class GameScreen implements Screen {
 
@@ -61,8 +60,7 @@ public class GameScreen implements Screen {
 	}
 
 	/**
-	 * Coloca al juego en pausa cada vez que esta pantalla se oculta
-	 * (para mostrar el InGameMenuScreen)
+	 * Cada vez que esta pantalla se muestra, se quita la pausa
 	 */
 	@Override
 	public void show() {
@@ -98,7 +96,7 @@ public class GameScreen implements Screen {
 		game.font.draw(game.batch, "PUNTOS: " + ship.getScore(), 15, 20);
 		game.font.draw(game.batch, "NIVEL: " + levelManager.getCurrentLevel(), 130, 20);
 
-		game.batch.draw(ResourceManager.getTexture("live"), 15, 30);
+		game.batch.draw(ResourceManager.getAtlas("ship").findRegion("ship", 1), 15, 30, 20, 10);
 		game.font.draw(game.batch, "X " + spriteManager.getShip().getLives(), 50, 40);
 		
 		game.batch.draw(ResourceManager.getTexture("bomb_score"), 15, 45);

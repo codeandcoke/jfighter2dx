@@ -21,8 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 /**
  * Pantalla de configuración del juego
  * @author Santiago Faci
- * @version 1.0
- *
+ * @version Agosto 2014
  */
 public class ConfigurationScreen implements Screen {
 
