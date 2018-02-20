@@ -1,10 +1,6 @@
 package org.sfsoft.jfighter2dx.managers;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,11 +38,17 @@ public class ConfigurationManager {
 			
 			Connection connection = null;
 			connection = DriverManager.getConnection("jdbc:sqlite:" + Gdx.files.internal("scores.db"));
-		
-			Statement statement = connection.createStatement();
-			statement.executeUpdate("CREATE TABLE IF NOT EXISTS scores (id integer primary key autoincrement, name text, score int)");
-			statement.executeUpdate("INSERT INTO scores (name, score) VALUES ('" + name + "', " + score + ")");
-			
+
+			String sql = "CREATE TABLE IF NOT EXISTS scores (id integer primary key autoincrement, name text, score int)";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.executeUpdate();
+
+			sql = "INSERT INTO scores (name, score) VALUES (?, ?)";
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, name);
+			statement.setInt(2, score);
+			statement.executeUpdate();
+
 			if (statement != null)
 				statement.close();
 			if (connection != null)
@@ -70,9 +72,10 @@ public class ConfigurationManager {
 			
 			Connection connection = null;
 			connection = DriverManager.getConnection("jdbc:sqlite:" + Gdx.files.internal("scores.db"));
-		
-			Statement statement = connection.createStatement();
-			ResultSet res = statement.executeQuery("SELECT name, score FROM scores ORDER BY score DESC LIMIT 10");
+
+			String sql = "SELECT name, score FROM scores ORDER BY score DESC LIMIT 10";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet res = statement.executeQuery();
 			List<Score> scores = new ArrayList<Score>();
 			Score score;
 			while (res.next()) {

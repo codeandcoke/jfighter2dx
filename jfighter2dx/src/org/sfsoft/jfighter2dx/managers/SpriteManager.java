@@ -96,7 +96,6 @@ public class SpriteManager {
 	/**
 	 * Actualiza el estado de los enemigos
 	 * @param dt
-	 * @throws SlickException
 	 */
 	private void updateEnemies(float dt) {
 		
@@ -219,7 +218,6 @@ public class SpriteManager {
 	
 	/**
 	 * Elimina todos los enemigos de la pantalla
-	 * @throws SlickException
 	 */
 	public void killAllEnemies() {
 		
@@ -241,7 +239,6 @@ public class SpriteManager {
 	/**
 	 * Comprueba las colisiones entre proyectiles y personaje/enemigos
 	 * @param dt
-	 * @throws SlickException
 	 */
 	private void checkCollisions(float dt) {
 		

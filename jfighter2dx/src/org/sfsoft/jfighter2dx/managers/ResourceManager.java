@@ -16,6 +16,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * cada vez que se necesitaban
  * @author Santiago Faci
  * @version Agosto 2014
+ *
+ * TODO Modificarlo para utilizar un AssetManager
  */
 public class ResourceManager {
 
