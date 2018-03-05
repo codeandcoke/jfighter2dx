@@ -1,7 +1,19 @@
 # Java class files
 *.class
-.DS_Store
+
+# Package files
+*.jar
+
 # generated files
 bin/
-gen/
+gen
 out/
+
+# Project files
+.idea
+
+# Gradle files
+.gradle
+
+# mac files
+.DS_Store
