@@ -1,19 +1,19 @@
 package com.codeandcoke.jfighter2dx.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.codeandcoke.jfighter2dx.JFighter2DX;
-import com.codeandcoke.jfighter2dx.util.Constants;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "JFighter2DX";
-		config.width = Constants.SCREEN_WIDTH;
-		config.height = Constants.SCREEN_HEIGHT;
+		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+		config.setForegroundFPS(60);
+		config.setTitle("JFighter2DX");
 
-		config.fullscreen = false;
+		Graphics.DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode();
+		config.setFullscreenMode(displayMode);
 
-		new LwjglApplication(new JFighter2DX(), config);
+		new Lwjgl3Application(new JFighter2DX(), config);
 	}
 }

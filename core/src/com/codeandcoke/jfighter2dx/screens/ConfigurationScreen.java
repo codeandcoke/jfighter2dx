@@ -58,7 +58,7 @@ public class ConfigurationScreen implements Screen {
         Label difficultyLabel = new Label("-- DIFFICULTY --", game.getSkin());
 
         String[] resolutionsArray = {"LOW", "MEDIUM", "HIGH"};
-        final List difficultyList = new List(game.getSkin());
+        final List<String> difficultyList = new List<>(game.getSkin());
         difficultyList.setItems(resolutionsArray);
 
         difficultyList.addListener(new ClickListener() {

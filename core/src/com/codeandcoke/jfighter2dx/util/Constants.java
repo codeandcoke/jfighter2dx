@@ -10,8 +10,8 @@ public interface Constants {
 	public static final String APP = "jfighter2dx";
 	
 	// Ancho y alto de la pantalla de juego
-	public static final int SCREEN_WIDTH = 800;
-	public static final int SCREEN_HEIGHT = 600;
+	public static final int SCREEN_WIDTH = 1920;
+	public static final int SCREEN_HEIGHT = 1200;
 	
 	// Límite de enemigos al mismo tiempo
 	public static final int ENEMY_LIMIT = 30;
